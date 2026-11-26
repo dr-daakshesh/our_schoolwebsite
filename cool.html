@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Rotating Cube</title>
+  <link rel="stylesheet" href="wokr.css">
+</head>
+<body>
+  <div
+    class="scene"
+    tabindex="0"
+    aria-label="Interactive cube. Scroll over it to turn it, or use the arrow keys."
+  >
+    <div class="model-wrapper" aria-hidden="true">
+      <div class="face front"></div>
+      <div class="face back"></div>
+      <div class="face right"></div>
+      <div class="face left"></div>
+      <div class="face top"></div>
+      <div class="face bottom"></div>
+    </div>
+  </div>
+  <p class="instructions">Scroll over the cube or focus it and use the arrow keys.</p>
+
+  <script>
+    const scene = document.querySelector(".scene");
+    const model = document.querySelector(".model-wrapper");
+    let rotationX = -20;
+    let rotationY = -30;
+
+    function renderRotation() {
+      model.style.setProperty("--rotate-x", `${rotationX}deg`);
+      model.style.setProperty("--rotate-y", `${rotationY}deg`);
+    }
+
+    scene.addEventListener("wheel", (event) => {
+      event.preventDefault();
+      const turn = Math.max(-8, Math.min(8, event.deltaY * 0.05));
+      rotationX += turn;
+      rotationY += turn;
+      renderRotation();
+    }, { passive: false });
+
+    scene.addEventListener("keydown", (event) => {
+      const step = 15;
+      if (event.key === "ArrowLeft") rotationY -= step;
+      else if (event.key === "ArrowRight") rotationY += step;
+      else if (event.key === "ArrowUp") rotationX -= step;
+      else if (event.key === "ArrowDown") rotationX += step;
+      else return;
+
+      event.preventDefault();
+      renderRotation();
+    });
+
+    renderRotation();
+  </script>
+</body>
+</html>
