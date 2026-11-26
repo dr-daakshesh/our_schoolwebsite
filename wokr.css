@@ -1,0 +1,80 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  min-height: 100vh;
+  margin: 0;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #333333;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.scene {
+  width: 160px;
+  height: 160px;
+  perspective: 800px;
+  outline: none;
+}
+
+.scene:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 12px;
+}
+
+.model-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rotate-x, -20deg)) rotateY(var(--rotate-y, -30deg));
+  transition: transform 160ms ease-out;
+}
+
+.face {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  backface-visibility: hidden;
+}
+
+.front {
+  background: #f2f2f2;
+  transform: translateZ(80px);
+}
+
+.back {
+  background: #dddddd;
+  transform: rotateY(180deg) translateZ(80px);
+}
+
+.right {
+  background: #e2e2e2;
+  transform: rotateY(90deg) translateZ(80px);
+}
+
+.left {
+  background: #d6d6d6;
+  transform: rotateY(-90deg) translateZ(80px);
+}
+
+.top {
+  background: #ffffff;
+  transform: rotateX(90deg) translateZ(80px);
+}
+
+.bottom {
+  background: #c9c9c9;
+  transform: rotateX(-90deg) translateZ(80px);
+}
+
+.instructions {
+  margin: 0;
+  color: #eeeeee;
+  font-size: 0.95rem;
+  text-align: center;
+}
